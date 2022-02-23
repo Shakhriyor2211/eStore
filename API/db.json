@@ -1,0 +1,70 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "imageURL": "https://www.stadiumguide.com/wp-content/uploads/guangzhou_top.jpg",
+      "title": "Lotus Flower Stadium",
+      "capacity": 100000,
+      "location": "Guangzhou, China",
+      "opened": "Soon...",
+      "price": 6000000000,
+      "rating": 5,
+      "club": "FC Guangzhou Evergrande"
+    },
+    {
+      "id": 2,
+      "imageURL": "https://www.vexcolteurope.com/wp-content/uploads/2018/04/ref_wembley_04.jpg",
+      "title": "Wembley",
+      "capacity": 90000,
+      "location": "London, United Kingdom",
+      "opened": "March 9, 2007",
+      "price": 4000000000,
+      "rating": 5,
+      "club": "England national football team"
+    },
+    {
+      "id": 3,
+      "imageURL": "https://assets.manutd.com/AssetPicker/images/0/0/15/106/1010397/DJI_00281628866578766_medium.jpg",
+      "title": "Old Trafford",
+      "capacity": 75000,
+      "location": "Manchester, United Kingdom",
+      "opened": "February 19, 1910",
+      "price": 3000000000,
+      "rating": 4,
+      "club": "FC Manchester United"
+    },
+    {
+      "id": 4,
+      "imageURL": "https://img.besthqwallpapers.com/Uploads/14-3-2020/124480/allianz-arena-german-football-stadium-munich-germany-fc-bayern-munich-stadium.jpg",
+      "title": "Allianz Arena",
+      "capacity": 75024,
+      "location": "Munich, Bavaria",
+      "opened": " October 21, 2002",
+      "price": 6000000000,
+      "rating": 5,
+      "club": "FC Bayern Munich"
+    },
+    {
+      "id": 5,
+      "imageURL": "https://lifeglobe.net/x/entry/8217/1.jpg",
+      "title": "Estadio Wanda Metropolitano",
+      "capacity": 68456,
+      "location": "Madrid, Spain",
+      "opened": "September 6, 1994",
+      "price": 4000000000,
+      "rating": 4.5,
+      "club": "FC Atletico Madrid"
+    },
+    {
+      "id": 6,
+      "imageURL": "https://cdn.vox-cdn.com/thumbor/T2FqcwU0gnv1m2iR-pJ5NVflNCM=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/4229485/stadium-2.0.jpg",
+      "title": "Tottenham Hotspur Stadium",
+      "capacity": 62850,
+      "location": "London, United Kingdom",
+      "opened": "April 3, 2019",
+      "price": 3000000000,
+      "rating": 4,
+      "club": "FC Tottenham Hotspur"
+    }
+  ]
+}
