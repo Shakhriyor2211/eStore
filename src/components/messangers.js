@@ -9,7 +9,7 @@ function Messanger() {
     <ul className="gap-x-4 lg:gap-x-10 text-white flex">
       <li>
         <Twitter
-          className="w-5 sm:w-8 hover:text-blue-500"
+          className="w-5 sm:w-8 hover:text-blue-500 cursor-pointer"
           // size="30"
           title="Twitter"
         />
@@ -17,21 +17,21 @@ function Messanger() {
 
       <li>
         <Facebook
-          className="w-5 sm:w-8 hover:text-blue-500"
+          className="w-5 sm:w-8 hover:text-blue-500 cursor-pointer"
           // size="30"
           title="Facebook"
         />
       </li>
       <li>
         <Youtube
-          className="w-5 sm:w-8 hover:text-blue-500"
+          className="w-5 sm:w-8 hover:text-blue-500 cursor-pointer"
           // size="30"
           title="Youtube"
         />
       </li>
       <li>
         <Instagram
-          className="w-5 sm:w-8 hover:text-blue-500"
+          className="w-5 sm:w-8 hover:text-blue-500 cursor-pointer"
           // size="30"
           title="Instagram"
         />

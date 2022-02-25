@@ -102,7 +102,7 @@ function UserDetail() {
 
       <div className="ml-3 relative">
         <div>
-          <Link to={"/register"}>
+          <Link to={"/login"}>
             <span className="sr-only">Open user menu</span>
             {user}
           </Link>

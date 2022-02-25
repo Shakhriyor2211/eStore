@@ -1,15 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput, { FormSelect } from "../../components/form";
-
+import { FormSelect } from "../../components/form";
 import Layout from "../../components/Layout";
-
+import FormInput from "../../components/form";
 function CreateStadium() {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [club, setClub] = useState("");
-  const [couch, setCouch] = useState("");
   const [image, setImage] = useState("");
   const [capacity, setCapacity] = useState("");
   const [openDate, setOpenDate] = useState("");
@@ -25,7 +23,43 @@ function CreateStadium() {
   const [errImage, setErrImage] = useState("");
 
   const throwHome = useNavigate("");
+  const selectStyle =
+    "border-2 border-gray-200 px-2 h-10 sm:h-12 w-24 outline-none focus:border-indigo-400 rounded text-sm";
+  const inputStyle =
+    "border-2 border-gray-200 px-2 h-10 sm:h-12 w-full outline-none focus:border-indigo-400 rounded";
+  const dateFormat = (date) => {
+    let year = date.slice(0, 4);
+    let month = date.slice(5, 7);
+    let day = date.slice(8, 10);
 
+    if (month === "01") {
+      month = "January";
+    } else if (month === "02") {
+      month = "February";
+    } else if (month === "03") {
+      month = "March";
+    } else if (month === "04") {
+      month = "April";
+    } else if (month === "05") {
+      month = "May";
+    } else if (month === "06") {
+      month = "June";
+    } else if (month === "07") {
+      month = "July";
+    } else if (month === "08") {
+      month = "August";
+    } else if (month === "09") {
+      month = "September";
+    } else if (month === "10") {
+      month = "October";
+    } else if (month === "11") {
+      month = "November";
+    } else if (month === "12") {
+      month = "December";
+    }
+    date = `${month} ${day}, ${year}`;
+    return date;
+  };
   return (
     <Layout>
       <div className="px-4">
@@ -33,6 +67,7 @@ function CreateStadium() {
           <div className="grid grid-cols-2 gap-6">
             <div>
               <FormInput
+                styleClass={inputStyle}
                 id="title"
                 title={"Title"}
                 type={"text"}
@@ -44,6 +79,7 @@ function CreateStadium() {
             </div>
             <div>
               <FormInput
+                styleClass={inputStyle}
                 id="location"
                 title={"Location"}
                 type={"text"}
@@ -57,6 +93,7 @@ function CreateStadium() {
             </div>
             <div>
               <FormInput
+                styleClass={inputStyle}
                 id="club"
                 title={"Club"}
                 type={"text"}
@@ -68,6 +105,7 @@ function CreateStadium() {
             </div>
             <div>
               <FormInput
+                styleClass={inputStyle}
                 id="image"
                 title={"ImageURL"}
                 type={"text"}
@@ -79,6 +117,7 @@ function CreateStadium() {
             </div>
             <div>
               <FormInput
+                styleClass={inputStyle}
                 id="capacity"
                 title={"Capacity"}
                 type={"Number"}
@@ -92,6 +131,7 @@ function CreateStadium() {
             </div>
             <div>
               <FormInput
+                styleClass={inputStyle}
                 id="price"
                 title={"Price"}
                 type={"Number"}
@@ -103,6 +143,7 @@ function CreateStadium() {
             </div>
             <div>
               <FormInput
+                styleClass={inputStyle}
                 id="date"
                 title={"Opened"}
                 type={"Date"}
@@ -118,6 +159,7 @@ function CreateStadium() {
               title={"Rating"}
               value={[rating, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]}
               valueState={setRating}
+              styleClass={selectStyle}
             />
           </div>
           <div className="flex justify-end items-center gap-2 mr-8 my-4 font-semibold bana">
@@ -141,8 +183,8 @@ function CreateStadium() {
                   openDate === "" ||
                   club === "" ||
                   image === "" ||
-                  price === "" ||
-                  capacity === ""
+                  price < 1000 ||
+                  capacity <= 0
                 ) {
                   if (title === "") {
                     setErrTitle("Required line");
@@ -159,34 +201,31 @@ function CreateStadium() {
                   if (image === "") {
                     setErrImage("Required line");
                   }
-                  if (capacity <= 0) {
-                    if (capacity === "") {
-                      setErrCapacity("Required line");
-                    } else {
-                      setErrCapacity("Capacity should be greater than 0");
-                    }
+
+                  if (capacity === "") {
+                    setErrCapacity("Required line");
+                  } else if (capacity <= 0) {
+                    setErrCapacity("Capacity should be greater than 0");
                   }
-                  if (price <= 1000) {
-                    if (price === "") {
-                      setErrPrice("Required line");
-                    } else {
-                      setErrPrice("Price should be greater than 1000");
-                    }
+
+                  if (price === "") {
+                    setErrPrice("Required line");
+                  } else if (price < 1000) {
+                    setErrPrice("Price should be greater than 1000");
                   }
                   return;
                 }
-                if (openDate) {
-                }
+
                 axios
                   .post("http://localhost:3000/products", {
-                    imageURL: image,
-                    title: title,
+                    imageURL: image.trim(),
+                    title: title.trim(),
                     capacity: Number(capacity),
-                    location: location,
-                    opened: openDate,
+                    location: location.trim(),
+                    opened: dateFormat(openDate),
                     price: Number(price),
                     rating: rating,
-                    club: club,
+                    club: club.trim(),
                   })
                   .then(() => {
                     throwHome("/");

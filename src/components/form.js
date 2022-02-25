@@ -5,15 +5,17 @@ function FormInput(props) {
         {props.title}
       </label>
       <input
+        autoFocus={props.focus}
         onChange={(e) => {
           e.preventDefault();
           props.valueState(e.target.value);
         }}
-        className="border-2 border-gray-200 px-2 h-10 sm:h-12 w-full outline-none focus:border-indigo-400 rounded"
+        className={props.styleClass}
         value={props.value}
         type={props.type}
         id={props.title}
         placeholder={props.hint}
+        minLength={props.min}
         required
       />
     </div>
@@ -27,7 +29,7 @@ export function FormSelect(props) {
         {props.title}
       </label>
       <select
-        className="border-2 border-gray-200 px-2 h-10 sm:h-12 w-24 outline-none focus:border-indigo-400 rounded text-sm"
+        className={props.styleClass}
         onChange={(e) => {
           e.preventDefault();
           props.valueState(e.target.value);

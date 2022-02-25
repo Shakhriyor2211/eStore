@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer>
       <div className="bg-gray-800 p-12 px-8">
-        <div className="max-w-7xl mx-auto md:grid-cols-2 md:gap-8 gap-6  grid lg:grid-cols-5 text-sm">
+        <div className="max-w-7xl mx-auto sm:grid-cols-2 md:gap-8 gap-5  grid lg:grid-cols-4 text-sm">
           <ul className="space-y-2">
             <li className="text-white font-bold leading-10">Get to Know Us</li>
             <li>
@@ -137,14 +137,7 @@ function Footer() {
             </li>
           </ul>
 
-          <div className="items-center justify-end hidden lg:flex  ">
-            <img
-              className=" w-40 h-40 bg-white rounded border-none  user-none"
-              src="https://freesvg.org/img/ocal2.png"
-              alt="QR"
-            />
-          </div>
-          <div className="lg:col-span-5 flex lg:items-center gap-6 my-4 flex-col">
+          <div className="md:col-span-4 flex md:items-center gap-6 my-4 flex-col">
             <p className="text-white font-semibold">FOLLOW STDIUM-STAR</p>
             <Messanger />
           </div>

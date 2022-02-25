@@ -151,7 +151,7 @@ function Detail() {
             <div className="animation absolute inset-0 bg-black bg-opacity-30">
               <div className="bg-blue-700 absolute top-1/3 right-1/3 w-1/3 py-20 shadow-md text-center space-y-4 rounded z-50 text-white">
                 <p className="text-2xl font-bold">Are you sure?</p>
-                <div className="text-xl space-x-4">
+                <div className="text-xl space-x-10">
                   <button
                     onClick={() => {
                       setCheckRequest(false);
