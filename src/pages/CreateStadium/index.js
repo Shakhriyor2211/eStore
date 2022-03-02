@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FormSelect } from "../../components/form";
 import Layout from "../../components/Layout";
 import FormInput from "../../components/form";
@@ -63,7 +63,7 @@ function CreateStadium() {
   return (
     <Layout>
       <div className="px-4">
-        <form className="max-w-3xl mx-auto shadow my-10 p-8 rounded ">
+        <form className="max-w-3xl mx-auto lg:shadow my-10 p-8 rounded ">
           <div className="grid grid-cols-2 gap-6">
             <div>
               <FormInput
@@ -162,16 +162,7 @@ function CreateStadium() {
               styleClass={selectStyle}
             />
           </div>
-          <div className="flex justify-end items-center gap-2 mr-8 my-4 font-semibold bana">
-            <button
-              className="bg-gray-300 transform hover:scale-95 hover:bg-gray-200 py-2 px-4 rounded text-black"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.replace("/");
-              }}
-            >
-              Cancel
-            </button>
+          <div className="flex flex-col md:flex-row md:justify-end md:items-center  gap-2 my-8 font-semibold">
             <button
               className="bg-indigo-600 transform hover:scale-95 hover:bg-indigo-500 py-2 px-4 rounded text-white"
               onClick={(e) => {
@@ -236,6 +227,15 @@ function CreateStadium() {
               }}
             >
               Submit
+            </button>
+            <button
+              className="bg-gray-300 transform hover:scale-95 hover:bg-gray-200 py-2 px-4 rounded text-black md:-order-1"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.replace("/");
+              }}
+            >
+              Cancel
             </button>
           </div>
         </form>

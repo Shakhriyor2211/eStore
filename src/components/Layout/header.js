@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { cart, closeMenu, openMenu, user } from "../../utils/icons";
 import { Link } from "react-router-dom";
-
+import { ProductContext } from "../../utils/ProductContext";
 import CustomLink from "././customLink";
 const Header = () => {
   const [menuBtn, setOpenBtn] = useState(true);
@@ -95,10 +95,18 @@ function Navigations() {
 }
 
 function UserDetail() {
+  const { cartItem } = useContext(ProductContext);
   return (
-    <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+    <div className="absolute inset-y-0 gap-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
       <span className="sr-only">View notifications</span>
-      {cart}
+      <Link to="/cart">
+        <div className="relative">
+          {cart}
+          <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-500 rounded-full">
+            {cartItem.length}
+          </span>
+        </div>
+      </Link>
 
       <div className="ml-3 relative">
         <div>
