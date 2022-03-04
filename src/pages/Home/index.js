@@ -25,18 +25,24 @@ const Home = () => {
     <>
       {data ? (
         <Layout>
-          <div className="flex sm:justify-between items-center mt-10  px-4">
-            <h1 className="text-xl md:text-4xl text-indigo-700">Stadiums</h1>
-            <Link
-              to="/createStadium"
-              className="text-2xl md:text-3xl text-white px-6  pb-2 rounded bg-indigo-700"
-            >
-              +
-            </Link>
-          </div>
-          <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 pt-6 pb-10 px-4 place-content-center">
+          <div className="grid gap-3 sm:gap-4  sm:grid-cols-2 lg:grid-cols-3 pt-6 pb-10 px-4 place-content-center mt-4 ">
+            <div className="flex gap-x-4 sm:col-span-2 lg:col-span-3 sm:justify-between items-center">
+              <h1 className="text-xl md:text-4xl text-indigo-700">Stadiums</h1>
+              <Link
+                to="/createStadium"
+                className="text-2xl md:text-3xl text-white px-4 sm:px-6  pb-2 rounded bg-indigo-700"
+              >
+                +
+              </Link>
+            </div>
             {data.map((stadium) => {
-              return <ProductCard key={stadium.id} stadium={stadium} />;
+              return (
+                <ProductCard
+                  key={stadium.id}
+                  stadium={stadium}
+                  btn={"Add to cart"}
+                />
+              );
             })}
           </div>
         </Layout>
