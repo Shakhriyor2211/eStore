@@ -1,17 +1,20 @@
 import axios from "axios";
-import Rate from "rc-rate/lib/Rate";
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Layout from "../../components/Layout";
-import "rc-rate/assets/index.css";
-import { trash, update } from "../../utils/icons";
+
 import { MutatingDots } from "react-loader-spinner";
+import ReactStars from "react-rating-stars-component";
+import { SportsClub } from "@styled-icons/entypo/SportsClub";
+import { Location } from "@styled-icons/fluentui-system-filled/Location";
+import { ReduceCapacity } from "@styled-icons/material-sharp/ReduceCapacity";
+import { ProductContext } from "../../utils/ProductContext";
 
 function Detail() {
   let id = useParams().urlId;
   const [data, setData] = useState(null);
-  const [checkRequest, setCheckRequest] = useState(false);
-  const navigate = useNavigate("");
+  const { cartItem, setCartItem } = useContext(ProductContext);
+
   useEffect(() => {
     setTimeout(() => {
       axios
@@ -46,138 +49,75 @@ function Detail() {
                     </h1>
 
                     <div className="mt-8 space-y-5 ">
-                      <p className="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6 mx-2 text-blue-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
+                      <p className="flex items-center text-gray-700 dark:text-gray-200">
+                        <SportsClub
+                          className="w-7 h-7 text-gray-500 cursor-pointer"
+                          // size="30"
+                          title="Twitter"
+                        />
 
                         <span className="mx-2"> {data.club}</span>
                       </p>
 
-                      <p className="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6 mx-2 text-blue-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
+                      <p className="flex items-center text-gray-700 dark:text-gray-200">
+                        <Location
+                          className="w-7 h-7 text-gray-500 cursor-pointer"
+                          // size="30"
+                          title="Twitter"
+                        />
 
                         <span className="mx-2">{data.location}</span>
                       </p>
 
-                      <p className="flex items-center -mx-2 text-gray-700 dark:text-gray-200">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="w-6 h-6 mx-2 text-blue-500"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
+                      <p className="flex items-center text-gray-700 dark:text-gray-200">
+                        <ReduceCapacity
+                          className="w-7 h-7 text-gray-500 cursor-pointer"
+                          // size="30"
+                          title="Twitter"
+                        />
 
                         <span className="mx-2">Capacity {data.capacity}</span>
                       </p>
-                      <div>
-                        <Rate
-                          count={5}
-                          defaultValue={data.rating}
-                          allowHalf={true}
-                          disabled={true}
-                          style={{
-                            fontSize: "30px",
-                          }}
-                        />
-                      </div>
+
+                      <ReactStars
+                        count={5}
+                        color={"#fff"}
+                        value={data.rating}
+                        size={40}
+                        isHalf={true}
+                        activeColor={"#0369a1"}
+                        edit={false}
+                      />
                     </div>
                   </div>
 
-                  <div className=" w-full mt-2 bg-transparent border rounded-md lg:max-w-sm dark:border-gray-700 focus-within:border-blue-400 focus-within:ring focus-within:ring-blue-300 dark:focus-within:border-blue-400 focus-within:ring-opacity-40">
-                    <form className="flex flex-col lg:flex-row">
-                      <input
-                        type="email"
-                        placeholder="Enter your email address"
-                        className="flex-1 h-10 px-4 py-2 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none dark:text-gray-200 focus:outline-none focus:placeholder-transparent focus:ring-0"
-                      />
-
-                      <button
-                        type="button"
-                        className="h-10 px-4 py-2 m-1 text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400"
-                      >
-                        Join Us
+                  <div className="my-2 gap-y-8 sm:gap-12 flex sm:items-center flex-col sm:flex-row">
+                    <p className="font-semibold text-xl text-gray-700 dark:text-gray-200">
+                      {data.price}$
+                    </p>
+                    <div className="flex gap-2">
+                      <button className="bg-red-500 transform hover:scale-95 py-3 px-8 rounded text-white">
+                        Buy now
                       </button>
-                    </form>
-                  </div>
-                  <div className="my-6 space-x-2 flex items-center">
-                    <button
-                      className="bg-red-500 transform hover:scale-95 h-12 px-8 rounded text-white flex items-center"
-                      onClick={() => {
-                        setCheckRequest(true);
-                      }}
-                    >
-                      {trash}
-                    </button>
-                    <Link
-                      to={`/detail/update/${id}`}
-                      className="bg-indigo-600 transform hover:scale-95  h-12 px-8 rounded text-white flex items-center"
-                    >
-                      {update}
-                    </Link>
+                      <button
+                        className="bg-indigo-600 transform hover:scale-95  py-3 px-8 rounded text-white"
+                        onClick={() => {
+                          if (cartItem.some((items) => data.id === items.id)) {
+                            return;
+                          }
+                          const newValue = [...cartItem];
+                          newValue.push(data);
+                          setCartItem(newValue);
+                        }}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            {checkRequest && (
-              <div className="animation absolute inset-0 bg-black bg-opacity-30">
-                <div className="bg-blue-700 absolute top-1/3 right-1/3 w-1/3 py-20 shadow-md text-center space-y-4 rounded z-50 text-white">
-                  <p className="text-2xl font-bold">Are you sure?</p>
-                  <div className="text-xl space-x-10">
-                    <button
-                      onClick={() => {
-                        setCheckRequest(false);
-                      }}
-                    >
-                      No
-                    </button>
-                    <button
-                      onClick={() => {
-                        axios
-                          .delete(`http://localhost:3000/products/${id}`)
-                          .then(() => {
-                            navigate("/");
-                          });
-                      }}
-                    >
-                      Yes
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+
             {/* <div className="fixed inset-x-0 lg:inset-x-auto bottom-6 lg:right-8 xl:right-10 xl:bottom-8">
         <div className="lg:w-72 px-6 lg:px-0">
           <div className="p-2 bg-blue-600 rounded-lg shadow-lg sm:p-3">

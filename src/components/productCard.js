@@ -1,18 +1,11 @@
-import { Link } from "react-router-dom";
-import { star, halfStar, cart, detail, trash } from "../utils/icons";
-import { ProductContext } from "../utils/ProductContext";
 import { useContext } from "react";
+import ReactStars from "react-rating-stars-component";
+import { ProductContext } from "../utils/ProductContext";
 
-function ProductCard({ stadium, deleteBtn, btn }) {
-  const { setCartItem, cartItem } = useContext(ProductContext);
-  const length = Math.floor(stadium.rating);
-  const createStar = [];
-
-  for (let i = 0; i < length; i++) {
-    createStar.push(star);
-  }
+function ProductCard({ stadium, btnValue }) {
+  const { cartItem, setCartItem } = useContext(ProductContext);
   return (
-    <div className="relative sm:min-w-fit bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 card">
+    <>
       <div className="relative">
         <img
           className=" rounded-t-lg w-full h-full object-cover aspect-video"
@@ -35,56 +28,43 @@ function ProductCard({ stadium, deleteBtn, btn }) {
             {stadium.title}
           </h3>
         </div>
-        <div className="flex items-center my-2.5">
-          {createStar.map((rating, index) => (
-            <span key={index}>{rating}</span>
-          ))}
-          {stadium.rating - length === 0.5 && halfStar}
-          <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-            {stadium.rating}
-          </span>
+        <div className="flex my-1 gap-x-4">
+          <ReactStars
+            count={5}
+            color={"#fff"}
+            value={stadium.rating}
+            size={30}
+            isHalf={true}
+            activeColor={"#0369a1"}
+            edit={false}
+          />
+          <p className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-4 py-2 rounded dark:bg-blue-200 dark:text-blue-800  inline-block self-center">
+            {stadium.rating % 1 === 0 ? `${stadium.rating}.0` : stadium.rating}
+          </p>
         </div>
         <p className="text-lg font-semibold text-gray-900 dark:text-white truncate">
           ${stadium.price}
         </p>
-        <div className="flex flex-col my-1 gap-2">
-          <button
-            className="text-white flex items-center justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={() => {
-              if (cartItem.some((card) => card.id === stadium.id)) {
-                return;
-              }
-              const items = [...cartItem];
-              items.push(stadium);
-              setCartItem(items);
-            }}
-          >
-            <span className="inline-block mr-2 w-5 h-5">{cart}</span>
-            <span>{btn}</span>
-          </button>
-          {deleteBtn && (
+        {btnValue && (
+          <div className="flex gap-2 justify-end mt-4">
             <button
-              className="text-white flex justify-center items-center gap-x-1 bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+              className="bg-red-600 transform hover:scale-95 py-2 px-8 rounded text-white"
               onClick={() => {
-                setCartItem(
-                  cartItem.filter((items) => items.id !== stadium.id)
+                const newValue = cartItem.filter(
+                  (items) => items.id !== stadium.id
                 );
+                setCartItem(newValue);
               }}
             >
-              {trash}
-              <span>Delete</span>
+              Delete
             </button>
-          )}
-          <button
-            className={
-              "focus:ring-4 flex items-center justify-center gap-1 focus:ring-gray-300 hover:bg-gray-500 hover:text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            }
-          >
-            {detail} <Link to={`/detail/${stadium.id}`}>Detail</Link>
-          </button>
-        </div>
+            <button className="bg-indigo-600 transform hover:scale-95 py-2 px-8 rounded text-white">
+              {btnValue}
+            </button>
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 }
 

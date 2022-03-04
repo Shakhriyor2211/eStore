@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import ProductCard from "../../components/productCard";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { MutatingDots } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -26,22 +26,18 @@ const Home = () => {
       {data ? (
         <Layout>
           <div className="grid gap-3 sm:gap-4  sm:grid-cols-2 lg:grid-cols-3 pt-6 pb-10 px-4 place-content-center mt-4 ">
-            <div className="flex gap-x-4 sm:col-span-2 lg:col-span-3 sm:justify-between items-center">
-              <h1 className="text-xl md:text-4xl text-indigo-700">Stadiums</h1>
-              <Link
-                to="/createStadium"
-                className="text-2xl md:text-3xl text-white px-4 sm:px-6  pb-2 rounded bg-indigo-700"
-              >
-                +
-              </Link>
-            </div>
             {data.map((stadium) => {
               return (
-                <ProductCard
-                  key={stadium.id}
-                  stadium={stadium}
-                  btn={"Add to cart"}
-                />
+                <Link
+                  to={`/detail/${stadium.id}`}
+                  className="relative sm:min-w-fit bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 card"
+                >
+                  <ProductCard
+                    key={stadium.id}
+                    stadium={stadium}
+                    btn={"Add to cart"}
+                  />
+                </Link>
               );
             })}
           </div>

@@ -10,12 +10,13 @@ function Cart() {
       <div className="grid gap-3 sm:gap-x-4 sm:grid-cols-2 md:grid-cols-3 pt-6 pb-10 px-4 place-content-center">
         {cartItem.map((product) => {
           return (
-            <ProductCard
-              key={cartItem.id}
-              stadium={product}
-              deleteBtn={true}
-              btn={"Buy"}
-            />
+            <div className="relative sm:min-w-fit bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 card">
+              <ProductCard
+                key={cartItem.id}
+                stadium={product}
+                btnValue={"Buy"}
+              />
+            </div>
           );
         })}
       </div>
